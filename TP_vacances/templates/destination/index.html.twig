@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Destination index{% endblock %}
+
+{% block body %}
+    <div>
+        <a href="{{ path('app_home') }}">Accueil</a>
+    </div>
+    <div class="d-flex justify-content-center mt-3">
+        <form class="col-12 d-flex justify-content-around border border-1 border-light rounded p-2 bg-dark"
+              action="{{ path('app_filter') }}">
+            <div class="row align-content-center justify-content-center">
+                <label for="filter"> Sélectionner le type de voyage :</label>
+            </div>
+            <div>
+                <select class="form-select" id="filter" name="filter">
+                    {% for type in typeList %}
+                        <option value="{{ type.id }}">{{ type.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div>
+                <select class="form-select" id="filter" name="pays">
+                    <option>-- Tous les pays --</option>
+                    {% for destination in destination %}
+                        <option value="{{ destination.country }}">{{ destination.country }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div>
+                <button class="btn btn-outline-light" type="submit">Filtrer</button>
+            </div>
+        </form>
+    </div>
+    {% if text is defined %}
+        <p>{{ text }}</p>
+    {% endif %}
+    <div class="row justify-content-around">
+        {% for destination in pagination %}
+            <div class="col-4 mt-4">
+                <div class="card border border-2 border-dark  h-100">
+                    <img class="card-img-top" src="{{ destination.image }}" alt="Card image cap">
+                    <div class="card-body">
+                        <h4 class="card-title">{{ destination.name }}</h4>
+                        <h5 class="card-title">{{ destination.country }}</h5>
+                        <p class="card-text">{{ destination.description|length > 60 ? destination.description|slice(0, 60) ~ '...' : destination.description }}</p>
+                    </div>
+                    <div class="card-footer">
+                        <a class="btn btn-dark"
+                           href="{{ path('app_destination_show', {'destination': destination.id}) }}">Découvrir</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="d-flex justify-content-center mt-4">
+        {{ knp_pagination_render(pagination) }}
+    </div>
+    {% if app.user %}
+        <a href="{{ path('app_destination_new') }}">NOUVELLE DESTINATION</a>
+    {% endif %}
+{% endblock %}
+

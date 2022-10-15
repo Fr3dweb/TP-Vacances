@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Destination{% endblock %}
+
+{% block body %}
+    <h1>Nouvelle destination</h1>
+
+    {% form_theme form 'bootstrap_5_layout.html.twig' %}
+
+    {{ include('destination/_form.html.twig') }}
+
+    <a href="{{ path('app_destination_index') }}">back to list</a>
+{% endblock %}

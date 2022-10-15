@@ -1,0 +1,18 @@
+App\Entity\Destination:
+  destination_1:
+    name: Paris
+    country: France
+    image:
+    description: Ville des lumières, des amours, on ne passe pas à côté de la grande tour de fer des Francais, grandement aimée par nos amis les bouffeurs de chiens.
+    type: '@type*'
+
+
+  destination_{2..50}:
+    name: <city()>
+    country: <country()>
+    image: <imageUrl()>
+    description: <text(200)>
+    type: '@type*'
+
+
+

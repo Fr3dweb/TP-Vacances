@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Page Profile
+{% endblock %}
+
+{% block body %}
+    <body style="background-color: #1c7430">
+        <h1>{{ user.username }}</h1>
+        <h1>{{ user.email }}</h1>
+        {% for review in reviews %}
+            <br>
+            <div style="border: 2px solid black; background-color: #8fd19e">
+                <p style="font-size: 24px;">{{ review.content }}</p>
+                <p style="font-size: 24px;">{{ review.notation }} / 5</p>
+                <a style="font-size: 24px; color: #0f6674" href="{{ path('app_destination_show', {'destination': review.destination.id}) }}">{{ review.destination.name }}</a>
+                <p style="font-size: 24px;">{{ review.destination.country }}</p>
+            </div>
+            <br>
+        {% endfor %}
+    </body>
+{% endblock %}

@@ -1,0 +1,6 @@
+App\Entity\Review:
+  review_{0..500}:
+    notation: <numberBetween(0,5)>
+    content: <text()>
+    user: '@user*'
+    destination: '@destination*'

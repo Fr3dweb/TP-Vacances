@@ -1,15 +1,43 @@
-<nav class="navbar navbar-expand-lg bg-light">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="{{ path('app_home') }}">Symfony</a>
+        <a class="navbar-brand fs-3 text fw-bolder" href="{{ path('app_home') }}"><i
+                    class="bi bi-airplane-engines-fill"></i>TOP VACANCES !</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
                 aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="collapse navbar-collapse d-flex justify-content-between" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-link" href="{{ path('app_home') }}">home</a>
+                <a class="nav-link fs-5 text" href="{{ path('app_destination_index') }}">Vos destinations</a>
+                <a class="nav-link fs-5 text" href="{{ path('app_contact') }}">Contact</a>
+            </div>
+            <div class="border border-1 rounded">
+                <form class="d-flex" role="search" action="{{ path('app_search') }}">
+                    <div class="p-1">
+                        <input class="form-control me-2 b" name="key" type="search" placeholder="Rechercher" aria-label="Search">
+                    </div>
+                    <div class="p-1">
+                        <select name="target" class="form-select" aria-label="Default select example">
+                            <option value="Destination" selected>Destination</option>
+                            <option value="User">User</option>
+                        </select>
+                    </div>
+                    <div class="p-1">
+                        <button class="btn btn-outline-light" type="submit">GO !</button>
+                    </div>
+                </form>
+            </div>
+            <div class="navbar-nav">
+                {% if app.user %}
+                    <a class="nav-link" href="{{ path('app_logout') }}">Déconnexion</a>
+                {% else %}
+                    <a class="nav-link" href="{{ path('app_login') }}">Connexion</a>
+                    <a class="nav-link" href="{{ path('app_register') }}">Inscription</a>
+                {% endif %}
             </div>
         </div>
     </div>
 </nav>
+
+
 

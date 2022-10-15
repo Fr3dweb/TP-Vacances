@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Destination{% endblock %}
+
+{% block body %}
+    <div class="m-3">
+        <p><a href="{{ path('app_home') }}">Accueil</a>
+            ->
+            <a href="{{ path('app_destination_index') }}">Destinations</a>
+            ->
+            {{ destination.name }}
+        </p>
+    </div>
+
+
+    <div class="m-3 border border-2 rounded border-dark">
+        <div>
+            <img class="card-img-top" src="{{ destination.image }}" alt="Card image cap">
+        </div>
+        <div class="d-flex justify-content-between p-2">
+            <div>
+                <h1 class="card-title">{{ destination.name }}</h1>
+                <h2 class="card-title">{{ destination.country }}</h2>
+            </div>
+            <div>
+                {% for type in typeList %}
+                    {% if type.id == destination.type.id %}
+                        <h4>{{ type.name }}</h4>
+                    {% endif %}
+                {% endfor %}
+                <h4>Note : {{ moyenne_review(destination)|round(2, 'floor') }}/5</h4>
+            </div>
+        </div>
+        <div class="p-2">
+            <div>
+                <h6>Description :</h6>
+                <p class="card-text">{{ destination.description }}</p>
+            </div>
+        </div>
+    </div>
+
+    {% form_theme form 'bootstrap_5_layout.html.twig' %}
+    <div class="m-3 border border-2 rounded border-dark p-2">
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <button class="btn btn-dark">{{ button_label|default('Save') }}</button>
+        {{ form_end(form) }}
+    </div>
+
+    {% for review in reviewList %}
+        {% if review.destination.id == destination.id %}
+            <div class="m-3 border border-2 rounded border-dark p-2">
+                <p>{{ review.content }}</p>
+                <p>{{ review.notation }} / 5 </p>
+                <div class="d-flex justify-content-between">
+                    <div class="d-flex flex-row align-items-center">
+                        {# <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(4).webp" alt="avatar" width="25"
+                                         height="25" /> #}
+                        {% for user in userList %}
+                            {% if review.user.id == user.id %}
+                                <a href="{{ path('app_profile', {'user': user.id}) }}"
+                                   class="small mb-0 ms-2">{{ user.username }}</a>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    {% endfor %}
+{% endblock %}

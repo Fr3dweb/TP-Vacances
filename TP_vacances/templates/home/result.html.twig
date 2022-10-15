@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Result{% endblock %}
+
+{% block body %}
+    {% if target == 'Destination' %}
+        <div class="d-flex justify-content-center flex-wrap">
+            {% for item in results %}
+                <div class="card m-auto mt-3 border border-2 border-dark" style="width: 18rem;">
+                    <img class="card-img-top" src="{{ item.image }}" alt="Card image cap">
+                    <div class="card-body">
+                        <h4 class="card-title">{{ item.name }}</h4>
+                        <h5 class="card-title">{{ item.country }}</h5>
+                        <p class="card-text">{{ item.description }}</p>
+                        <a class="btn btn-dark"
+                           href="{{ path('app_destination_show', {'destination': item.id}) }}">Découvrir</a>
+                        {# <a class="btn btn-primary" href="{{ path('app_destination_edit', {'id': destination.id}) }}">edit</a> #}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+    {% if target == 'User' %}
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Password</th>
+            </tr>
+            </thead>
+            <tbody>
+        {% for item in results %}
+            <tr>
+                <td>{{ item.username }}</td>
+                <td>{{ item.email }}</td>
+                <td>{{ item.password }}</td>
+            </tr>
+        {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+{% endblock %}

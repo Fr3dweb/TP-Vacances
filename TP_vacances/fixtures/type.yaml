@@ -1,0 +1,32 @@
+App\Entity\Type:
+  type_1:
+    name: Auto-stop
+  type_2:
+    name: Aventure
+  type_3:
+    name: Camping Sauvage
+  type_4:
+    name: Circuit touristique
+  type_5:
+    name: Circumnavigation
+  type_6:
+    name: Covoiturage
+  type_7:
+    name: Croisière
+  type_8:
+    name: Excursion
+  type_9:
+    name: Pèlerinage
+  type_10:
+    name: Randonnée pédestre
+  type_11:
+    name: Road trip
+  type_12:
+    name: Tour du monde
+  type_13:
+    name: Tournée
+  type_14:
+    name: Voyage experimental
+  type_15:
+    name: Voyage initiatique
+
